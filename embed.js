@@ -148,8 +148,6 @@
                           'height',
                           height
                       );
-
-                      // set the units as pixels if there isn't a percentual unit given
                       if (height.indexOf('%') < 0) {
                           domElement.style.height = height + 'px';
                       } else {
