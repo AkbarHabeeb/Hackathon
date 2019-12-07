@@ -13,10 +13,10 @@
     <body>
         <div class="container">
 
-            <h1>LEARN WORDS</h1>
+            <!-- <h1>LEARN WORDS</h1> -->
+            <img src="image/logo.jpeg"/>
             <p class="page-description">When a Alphabet is pronouced it will help your kid to remember it by showing its picture.</p>
 
-            <!--<h3 class="no-browser-support">Sorry, Your Browser Doesn't Support the Web Speech API. Try Opening This Demo In Google Chrome.</h3>-->
 
             <div class="app">
                 <h3>Hi buddy, please say a alphabet</h3>
@@ -24,27 +24,33 @@
 
                 </div>
                 <div class="input-single">
-                    <textarea id="note-textarea" placeholder="Create a new note by typing or using voice recognition." rows="3"></textarea>
+                    <textarea id="note-textarea" placeholder="Say an alphabet. Ex.'A for'" rows="3"></textarea>
                 </div>
                 <button id="start-record-btn" title="Start Recording">Let's Start</button>
                 <button id="pause-record-btn" title="Pause Recording">Pause</button>
-                <button id="voice-out" title="Speak Out">Speak Out</button>;
-                <!--<button id="save-note-btn" title="Save Note">Save Note</button>-->
+                <button id="voice-out" title="Speak Out">Speak Out</button>
                 <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
 
-                <!--<h3>My Notes</h3>
-                <ul id="notes">
-                    <li>
-                        <p class="no-notes">You don't have any notes.</p>
-                    </li>
-                </ul>-->
-
             </div>
-
+            <!-- <div class="kidmonsgame" data-width="830" data-height="590" data-gameid="simon-memorize">
+                
+                  <a class="kmlink" href="http://kidmons.com/game/simon-memorize" target="_blank">Play fighting games on kidmons</a>
+            </div> -->
         </div>
+        <iframe class="loading" style="height:100%; width:100%" align="center" frameborder="0" allowtransparency="true" src="https://cdn2.kidmons.com/games/kitten/index.php"></iframe>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="script.js"></script>
+        <script>
+          (function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "embed.js";
+              fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'spritted-sdk'));
+          </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+          <script src="script.js"></script>
 
     </body>
 </html>

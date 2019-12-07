@@ -45,22 +45,55 @@ recognition.onresult = function(event) {
   var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 
   if(!mobileRepeatBug) {
-    noteContent += transcript;
+    noteContent = transcript.toLowerCase();
+    
     if(alphabets_set.has(noteContent))
     {
       //API Call for the words
-      noteContent = noteContent + " " + "apple";
-      noteTextarea.val(noteContent.toLowerCase());
-      readOutLoud(noteContent);
+      // noteContent = noteContent + " " + "apple";
+      ajax_get("http://localhost:3000/api/words/getWord?alphabet="+noteContent, function(data) {
+        console.log(noteContent);
+        console.log(data);
+        noteContent = data.result.alphabet + " "+data.result.word;
+        readOutLoud(noteContent);
+        noteTextarea.val(noteContent.toLowerCase());
+        var html = "<img src=\""+data.result.image_url+"\"/>"
+        document.getElementById("img_output").innerHTML = html;
+      });
+      recognition.stop();
+      // noteTextarea.val(noteContent.toLowerCase());
+      
       noteContent = "";
+
     }
     else
     {
-      noteTextarea.val("Try Again Kid");
+      console.log(noteContent);
+      noteTextarea.val("Voice is not audible. Please press START again");
+      recognition.stop();
     }
   }
 
 };
+
+function ajax_get(url, callback) {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          console.log('responseText:' + xmlhttp.responseText);
+          try {
+              var data = JSON.parse(xmlhttp.responseText);
+          } catch(err) {
+              console.log(err.message + " in " + xmlhttp.responseText);
+              return;
+          }
+          callback(data);
+      }
+  };
+
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+}
 
 recognition.onstart = function() {
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
@@ -160,7 +193,7 @@ function readOutLoud(message) {
   // Set the text and voice attributes.
 	speech.text = message;
 	speech.volume = 1;
-	speech.rate = 0.3;
+	speech.rate = 0.5;
 	speech.pitch = 1;
 
 	window.speechSynthesis.speak(speech);
